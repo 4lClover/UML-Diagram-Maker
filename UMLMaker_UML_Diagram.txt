@@ -1,0 +1,30 @@
++-------------------------------------------------+
+|  UMLMaker                                       |
++-------------------------------------------------+
+|  -class_name:string                             |
+|  -class_member_var:string                       |
+|  -class_method:string                           |
+|  -edge_sep_line:string                          |
+|  -PAD_CHART:const int                           |
+|  -chart_width:int                               |
+|  -class_variables:vector<string>                |
+|  -con_de_structors:vector<string>               |
+|  -class_methods:vector<string>                  |
+|  -chart_data:vector<string>                     |
++-------------------------------------------------+
+|  +UMLMaker()                                    |
+|  +UMLMaker(class_name:string)                   |
+|  +~UMLMaker()                                   |
++-------------------------------------------------+
+|  +setClassName(class_name:string):void          |
+|  +getClassName():string                         |
+|  +setClassVar(class_variable:string):void       |
+|  +setClassConstructor(constructor:string):void  |
+|  +setClassDestructor(destructor:string):void    |
+|  +setClassMethod(class_method:string):void      |
+|  +setWidth():void                               |
+|  +makeEdgeSepLine():void                        |
+|  +makeChart():void                              |
+|  +displayChart():void                           |
+|  +chartToFile():void                            |
++-------------------------------------------------+
