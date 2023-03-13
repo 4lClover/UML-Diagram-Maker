@@ -5,7 +5,7 @@ Date:2/28/2023
 C/Cpp:11+ ANSI Standard
 Last Updated:3/12/2023
 
-UML Diagrams Maker produces UML diagrams.
+UML Diagram Maker produces UML diagrams.
 
     +-----------------------+
     |  UML Diagram Maker    |
