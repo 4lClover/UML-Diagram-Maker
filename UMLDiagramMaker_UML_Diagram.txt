@@ -1,8 +1,0 @@
-+-----------------------+
-|  UML Diagram Maker    |
-+-----------------------+
-|  +main():int          |
-|  +greeting():void     |
-|  +menu():static void  |
-|  +classMaker():void   |
-+-----------------------+
