@@ -3,11 +3,9 @@ Class:UMLMaker
 Author:Phillip McCullough
 Date:3/4/2023
 C/Cpp:11+ ANSI Standard
-Last Updated:3/12/2023
+Last Updated:3/15/2023
 
 IMPORTANT, see the chartToFile() definition!!
-
-For detailed information see ReadMe.txt
 
 This class is used to produce Unified Modeling Language (UML) diagrams.
 UMLMaker.cpp holds UMLMaker class method definitions.
@@ -127,8 +125,14 @@ void UMLMaker::makeChart()
 
     if (UMLMaker::class_name != "")
     {
-        line = "|  " + class_name;
-        for (int i = 0; i < (chart_width - class_name.length() - PAD_CHART); i++)
+        int leading_space = (chart_width - class_name.length() - PAD_CHART) / 2;
+        int closing_space = (chart_width - class_name.length()) / 2.0 + 0.5 - (PAD_CHART / 2);
+
+        line = "|  ";
+        for (int i = 0; i < leading_space; i++)
+            line += ' ';
+        line += class_name;
+        for (int i = 0; i < closing_space; i++)
             line += ' ';
         line += "  |";
 
@@ -202,9 +206,8 @@ void UMLMaker::displayChart()
 // ----------------------------------------------------------------------------
 
 void UMLMaker::chartToFile()
-{        
-    string file_name = (//"C:/Users/phill/Documents/"<~ Insert your output path!
-                        "" + UMLMaker::class_name + "_UML_Diagram.txt");
+{                     //"C:/Users/phill/Documents/"<~ Insert your output path!
+    string file_name = ("" + UMLMaker::class_name + "_UML_Diagram.txt");
 
     ofstream to_file(file_name);
     if (to_file.is_open())

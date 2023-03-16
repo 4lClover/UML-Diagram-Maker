@@ -32,9 +32,9 @@ You can have as many items of a type as you need, and you can decline to create 
 After your data entry is complete a copy of your diagram is displayed in the terminal. You can copy and paste that diagram if you do not want a copy in a text file. If you are happy with the diagram, you can output the diagram to a text file. If corrections need to be made you can make changes in the text file or start over and make corrections in the program. A convenient feature is the ability to publish your output to any path you like. See the chartToFile method at the bottom of UMLMaker.cpp and an example path is given. If you do not provide a path, by default your output files will be in the same directory as your executable. The name of your output files will take the class name followed by _UML_Diagram.txt, example, UMLMaker_UML_Diagram.txt. You can create as many different diagrams as you like in a single session if each diagram has a different class name. 
 
 
-Here is a simple UML Diagram of the UML Diagram Maker program. 
+Here is a simple UML Diagram of the UML Diagram Maker program.
 +-----------------------+
-|  UML Diagram Maker    |
+|   UML Diagram Maker   |
 +-----------------------+
 |  +main():int          |
 |  +greeting():void     |
@@ -45,7 +45,7 @@ Here is a simple UML Diagram of the UML Diagram Maker program.
 
 This is the UML Diagram for the UMLMaker class.  
 +-------------------------------------------------+
-|  UMLMaker                                       |
+|                    UMLMaker                     |
 +-------------------------------------------------+
 |  -class_name:string                             |
 |  -class_member_var:string                       |
@@ -53,10 +53,10 @@ This is the UML Diagram for the UMLMaker class.
 |  -edge_sep_line:string                          |
 |  -PAD_CHART:const int                           |
 |  -chart_width:int                               |
-|  -class_variables:vector<string>                |
-|  -con_de_structors:vector<string>               |
-|  -class_methods:vector<string>                  |
-|  -chart_data:vector<string>                     |
+|  -class_variables:vector <string>               |
+|  -con_de_structors:vector <string>              |
+|  -class_methods:vector <string>                 |
+|  -chart_data:vector <string>                    |
 +-------------------------------------------------+
 |  +UMLMaker()                                    |
 |  +UMLMaker(class_name:string)                   |

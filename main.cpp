@@ -3,20 +3,18 @@ Program:UML Diagram Maker
 Author:Phillip McCullough
 Date:2/28/2023
 C/Cpp:11+ ANSI Standard
-Last Updated:3/12/2023
+Last Updated:3/15/2023
 
 UML Diagram Maker produces UML diagrams.
 
     +-----------------------+
-    |  UML Diagram Maker    |
+    |   UML Diagram Maker   |
     +-----------------------+
     |  +main():int          |
     |  +greeting():void     |
     |  +menu():static void  |
     |  +classMaker():void   |
     +-----------------------+
-
-For detailed information see ReadMe.txt
 -------10--------20--------30--------40--------50--------60--------70--------80
 */
 #include "UMLMaker.h"
