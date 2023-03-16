@@ -45,8 +45,8 @@ void greeting()
             "      Welcome to UML Diagram Maker\n"
             "  ------------------------------------\n"
             "  You can create UML (Unified Modeling Language) diagrams\n"
-            "  by answering a series of yes or no questions.\n"
-            "  You will be prompted for specific information needed to generate\n"
+            "  by answering a series of yes or no questions. You will\n"
+            "  be prompted for specific information needed to generate\n"
             "  a UML diagram with your specifications.\n";
 }
 
