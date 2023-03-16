@@ -1,6 +1,6 @@
 # UML-Diagram-Maker
 
-![UML Diagram Maker Screenshot 3-12-2023](https://user-images.githubusercontent.com/61360844/225528213-7813da6f-9efa-47ea-9740-07e63a0d4531.png)
+![UML Diagram Maker Screenshot 3-12-2023](https://user-images.githubusercontent.com/61360844/225535032-a028529d-3fe2-4a98-91fa-cd44326d7298.png)
 
 
 UML Diagram Maker is a terminal application utility that simplifies the process of building UML (Unified Modeling Language) ascii charts for documentation inside for and with your source code. UML Diagram Maker was built by a developer for developers. UML Diagram Maker is written in C/C++ but can be easily ported to other languages. 
