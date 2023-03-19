@@ -3,7 +3,7 @@ Program:UML Diagram Maker
 Author:Phillip McCullough
 Date:2/28/2023
 C/Cpp:11+ ANSI Standard
-Last Updated:3/15/2023
+Last Updated:3/19/2023
 
 UML Diagram Maker produces UML diagrams.
 
@@ -21,7 +21,6 @@ UML Diagram Maker produces UML diagrams.
 #include <iostream>
 #include <string>
 #include <cctype>
-#include <cstdlib>
 using namespace std;
 
 void greeting();
@@ -34,7 +33,7 @@ int main()
     greeting();
     menu();
 
-    return -1;
+    return 0;
 }
 
 // ----------------------------------------------------------------------------
@@ -42,42 +41,43 @@ int main()
 void greeting()
 {
     cout << "\n"
-            "      Welcome to UML Diagram Maker\n"
-            "  ------------------------------------\n"
-            "  You can create UML (Unified Modeling Language) diagrams\n"
-            "  by answering a series of yes or no questions. You will\n"
-            "  be prompted for specific information needed to generate\n"
-            "  a UML diagram with your specifications.\n";
+        "      Welcome to UML Diagram Maker\n"
+        "  ------------------------------------\n"
+        "  You can create UML (Unified Modeling Language) diagrams\n"
+        "  by answering a series of yes or no questions. You will\n"
+        "  be prompted for specific information needed to generate\n"
+        "  a UML diagram with your specifications.\n";
 }
 
 // ----------------------------------------------------------------------------
 
 static void menu()
 {
-    string line = "";
-    char option = '_';
-
-    cout << "\n"
+    string line;
+    char option;
+    do
+    {
+        cout << "\n"
             "  Options:\n"
             "  1)Make a UML Class Diagram.\n"
             "  2)Exit\n"
             "  Enter an option number: ";
-    getline(cin, line);
-    option = line[0];
+        getline(cin, line);
+        option = line[0];
 
-    switch (option)
-    {
-    case '1':
-        classMaker();
-        menu();
-        break;
-    case '2':
-        exit(EXIT_SUCCESS);
-    default:
-        cout << "\n"
+        switch (option)
+        {
+        case '1':
+            classMaker();
+            break;
+        case '2':
+            line = "exit";
+            break;
+        default:
+            cout << "\n"
                 "  Sorry, I didn't get that. Choose a valid option.\n";
-        menu();
-    }
+        }
+    } while (line != "exit");
 }
 
 // ----------------------------------------------------------------------------
@@ -86,19 +86,16 @@ void classMaker()
 {
     string yes_no, line, atribute, con_de_structor, method;
 
-    yes_no = "";
-    line = "";
-
     do
     {
         cout << "\n"
-                "  Enter the ClassName: ";
+            "  Enter the ClassName: ";
         getline(cin, line);
 
         cout << "\n"
-                "  You entered: "
+            "  You entered: "
              << line << "\n"
-                        "  Is this correct? [yes/no]: ";
+            "  Is this correct? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -106,15 +103,14 @@ void classMaker()
 
     // ----------------------------------------------------------------------------
 
-    UMLMaker diagram = UMLMaker(line); // diagram == Instance class UMLMaker.
+    UMLMaker diagram = UMLMaker(line); // diagram == instance class UMLMaker.
 
     // Atributes, private then public.
-    atribute = "";
 
     do
     {
         cout << "\n"
-                "  Create private class atribute? [yes/no]: ";
+            "  Create private class atribute? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -127,13 +123,13 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Enter atribute name: ";
+                "  Enter atribute name: ";
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -144,13 +140,13 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Enter atribute type: ";
+                "  Enter atribute type: ";
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -163,7 +159,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another private class artibute? [yes/no]: ";
+                "  Create another private class artibute? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -175,7 +171,7 @@ void classMaker()
     do
     {
         cout << "\n"
-                "  Create public class atribute? [yes/no]: ";
+            "  Create public class atribute? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -188,13 +184,13 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Enter atribute name: ";
+                "  Enter atribute name: ";
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -209,9 +205,9 @@ void classMaker()
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -224,7 +220,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another public class artibute? [yes/no]: ";
+                "  Create another public class artibute? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -234,12 +230,11 @@ void classMaker()
     // ----------------------------------------------------------------------------
 
     // Constructors, private then public.
-    con_de_structor = "";
 
     do
     {
         cout << "\n"
-                "  Create private constructor? [yes/no]: ";
+            "  Create private constructor? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -254,7 +249,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Add parameter? [yes/no]: ";
+                "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -265,13 +260,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter name: ";
+                    "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -282,13 +277,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter type: ";
+                    "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -299,7 +294,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Add another parameter? [yes/no]: ";
+                    "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -316,7 +311,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another private constructor? [yes/no]: ";
+                "  Create another private constructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -328,7 +323,7 @@ void classMaker()
     do
     {
         cout << "\n"
-                "  Create public constructor? [yes/no]: ";
+            "  Create public constructor? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -343,7 +338,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Add parameter? [yes/no]: ";
+                "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -354,13 +349,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter name: ";
+                    "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -371,13 +366,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter type: ";
+                    "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -388,7 +383,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Add another parameter? [yes/no]: ";
+                    "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -405,7 +400,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another public constructor? [yes/no]: ";
+                "  Create another public constructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -415,12 +410,11 @@ void classMaker()
     // ----------------------------------------------------------------------------
 
     // Destructors, private then public.
-    con_de_structor = "";
 
     do
     {
         cout << "\n"
-                "  Create private destructor? [yes/no]: ";
+            "  Create private destructor? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -435,7 +429,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Add parameter? [yes/no]: ";
+                "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -446,13 +440,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter name: ";
+                    "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -463,13 +457,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter type: ";
+                    "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -480,7 +474,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Add another parameter? [yes/no]: ";
+                    "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -497,7 +491,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another private destructor? [yes/no]: ";
+                "  Create another private destructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -509,7 +503,7 @@ void classMaker()
     do
     {
         cout << "\n"
-                "  Create public destructor? [yes/no]: ";
+            "  Create public destructor? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -524,7 +518,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Add parameter? [yes/no]: ";
+                "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -535,13 +529,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter name: ";
+                    "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -552,13 +546,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter type: ";
+                    "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -569,7 +563,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Add another parameter? [yes/no]: ";
+                    "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -586,7 +580,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another public destructor? [yes/no]: ";
+                "  Create another public destructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -596,12 +590,11 @@ void classMaker()
     // ----------------------------------------------------------------------------
 
     // Methods, private then public.
-    method = "";
 
     do
     {
         cout << "\n"
-                "  Create private method? [yes/no]: ";
+            "  Create private method? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -614,13 +607,13 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Enter method name: ";
+                "  Enter method name: ";
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -632,7 +625,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Add parameter? [yes/no]: ";
+                "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -643,13 +636,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter name: ";
+                    "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -660,13 +653,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter type: ";
+                    "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -677,7 +670,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Add another parameter? [yes/no]: ";
+                    "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -690,13 +683,13 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Enter method return type: ";
+                "  Enter method return type: ";
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -709,7 +702,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another private method? [yes/no]: ";
+                "  Create another private method? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -721,7 +714,7 @@ void classMaker()
     do
     {
         cout << "\n"
-                "  Create public method? [yes/no]: ";
+            "  Create public method? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
@@ -734,13 +727,13 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Enter method name: ";
+                "  Enter method name: ";
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -752,7 +745,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Add parameter? [yes/no]: ";
+                "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -763,13 +756,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter name: ";
+                    "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -780,13 +773,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Enter parameter type: ";
+                    "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                        "  You entered: "
+                    "  You entered: "
                      << line << "\n"
-                                "  Is this correct? [yes/no]: ";
+                    "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -797,7 +790,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                        "  Add another parameter? [yes/no]: ";
+                    "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -810,13 +803,13 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Enter method return type: ";
+                "  Enter method return type: ";
             getline(cin, line);
 
             cout << "\n"
-                    "  You entered: "
+                "  You entered: "
                  << line << "\n"
-                            "  Is this correct? [yes/no]: ";
+                "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
         } while (yes_no != "y");
@@ -828,7 +821,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                    "  Create another public method? [yes/no]: ";
+                "  Create another public method? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -842,16 +835,20 @@ void classMaker()
     diagram.makeChart();
     diagram.displayChart();
 
-    cout << "\n"
+    do
+    {
+        cout << "\n"
             "  Write this diagram to file? [yes/no]: ";
-    getline(cin, yes_no);
-    yes_no = tolower(yes_no[0]);
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
 
-    if (yes_no == "y")
-        diagram.chartToFile();
+        if (yes_no == "y")
+            diagram.chartToFile();
+
+    } while (yes_no != "y" && yes_no != "n");
 
     cout << "\n"
-            "  Create another UML Diagram.";
+        "  Create another UML Diagram.";
 }
 
 // ----------------------------------------------------------------------------

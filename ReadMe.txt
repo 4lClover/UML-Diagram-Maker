@@ -51,7 +51,7 @@ This is the UML Diagram for the UMLMaker class.
 |  -class_member_var:string                       |
 |  -class_method:string                           |
 |  -edge_sep_line:string                          |
-|  -PAD_CHART:const int                           |
+|  -MARGIN:const int                              |
 |  -chart_width:int                               |
 |  -class_variables:vector <string>               |
 |  -con_de_structors:vector <string>              |

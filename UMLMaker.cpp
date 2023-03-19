@@ -3,11 +3,11 @@ Class:UMLMaker
 Author:Phillip McCullough
 Date:3/4/2023
 C/Cpp:11+ ANSI Standard
-Last Updated:3/15/2023
+Last Updated:3/19/2023
 
 IMPORTANT, see the chartToFile() definition!!
 
-This class is used to produce Unified Modeling Language (UML) diagrams.
+This class is used to produce UML (Unified Modeling Language) diagrams.
 UMLMaker.cpp holds UMLMaker class method definitions.
 -------10--------20--------30--------40--------50--------60--------70--------80
 */
@@ -88,21 +88,21 @@ void UMLMaker::setWidth()
     int longest = UMLMaker::class_name.length();
 
     if (!UMLMaker::con_de_structors.empty())
-        for (string in : UMLMaker::con_de_structors)
-            if (in.length() > longest)
-                longest = in.length();
+        for (string con_des : UMLMaker::con_de_structors)
+            if (con_des.length() > longest)
+                longest = con_des.length();
 
     if (!UMLMaker::class_variables.empty())
-        for (string in : UMLMaker::class_variables)
-            if (in.length() > longest)
-                longest = in.length();
+        for (string var : UMLMaker::class_variables)
+            if (var.length() > longest)
+                longest = var.length();
 
     if (!UMLMaker::class_methods.empty())
-        for (string in : UMLMaker::class_methods)
-            if (in.length() > longest)
-                longest = in.length();
+        for (string method : UMLMaker::class_methods)
+            if (method.length() > longest)
+                longest = method.length();
 
-    UMLMaker::chart_width = (longest + UMLMaker::PAD_CHART);
+    UMLMaker::chart_width = (longest + (UMLMaker::MARGIN * 2));
 }
 
 // ----------------------------------------------------------------------------
@@ -110,7 +110,7 @@ void UMLMaker::setWidth()
 void UMLMaker::makeEdgeSepLine()
 {
     UMLMaker::edge_sep_line = "+";
-    for (int i = 0; i < UMLMaker::chart_width - 2; i++)
+    for (int i = 0; i < UMLMaker::chart_width; i++)
         UMLMaker::edge_sep_line += '-';
     UMLMaker::edge_sep_line += "+";
 }
@@ -119,44 +119,46 @@ void UMLMaker::makeEdgeSepLine()
 
 void UMLMaker::makeChart()
 {
-    string line = "";
+    string line;
 
     UMLMaker::chart_data.push_back(UMLMaker::edge_sep_line);
 
     if (UMLMaker::class_name != "")
     {
-        int leading_space = (chart_width - class_name.length() - PAD_CHART) / 2;
-        int closing_space = (chart_width - class_name.length()) / 2.0 + 0.5 - (PAD_CHART / 2);
+        int leading_space = (chart_width - class_name.length()) / 2;
+        int closing_space = (chart_width - class_name.length()) / 2.0 + 0.5;
 
-        line = "|  ";
+        line = "|";
         for (int i = 0; i < leading_space; i++)
             line += ' ';
         line += class_name;
         for (int i = 0; i < closing_space; i++)
             line += ' ';
-        line += "  |";
+        line += "|";
 
         UMLMaker::chart_data.push_back(line);
-        line = "";
     }
     else
     {
         cout << "\n"
-                "  A class name is required, try again.\n";
+            "  A class name is required, try again.\n";
     }
 
     if (!UMLMaker::class_variables.empty())
     {
         UMLMaker::chart_data.push_back(UMLMaker::edge_sep_line);
 
-        for (string in : UMLMaker::class_variables)
+        for (string var : UMLMaker::class_variables)
         {
-            line = "|  " + in;
-            for (int i = 0; i < (chart_width - in.length() - PAD_CHART); i++)
+            line = "|";
+            for (int i = 0; i < MARGIN; i++)
                 line += ' ';
-            line += "  |";
+            line += var;
+            for (int i = 0; i < (chart_width - var.length() - MARGIN); i++)
+                line += ' ';
+            line += "|";
+
             UMLMaker::chart_data.push_back(line);
-            line = "";
         }
     }
 
@@ -164,14 +166,17 @@ void UMLMaker::makeChart()
     {
         UMLMaker::chart_data.push_back(UMLMaker::edge_sep_line);
 
-        for (string in : UMLMaker::con_de_structors)
+        for (string con_des : UMLMaker::con_de_structors)
         {
-            line = "|  " + in;
-            for (int i = 0; i < (chart_width - in.length() - PAD_CHART); i++)
+            line = "|";
+            for (int i = 0; i < MARGIN; i++)
                 line += ' ';
-            line += "  |";
+            line += con_des;
+            for (int i = 0; i < (chart_width - con_des.length() - MARGIN); i++)
+                line += ' ';
+            line += "|";
+
             UMLMaker::chart_data.push_back(line);
-            line = "";
         }
     }
 
@@ -179,14 +184,17 @@ void UMLMaker::makeChart()
     {
         UMLMaker::chart_data.push_back(UMLMaker::edge_sep_line);
 
-        for (string in : UMLMaker::class_methods)
+        for (string method : UMLMaker::class_methods)
         {
-            line = "|  " + in;
-            for (int i = 0; i < (chart_width - in.length() - PAD_CHART); i++)
+            line = "|";
+            for (int i = 0; i < MARGIN; i++)
                 line += ' ';
-            line += "  |";
+            line += method;
+            for (int i = 0; i < (chart_width - method.length() - MARGIN); i++)
+                line += ' ';
+            line += "|";
+
             UMLMaker::chart_data.push_back(line);
-            line = "";
         }
     }
 
@@ -200,14 +208,14 @@ void UMLMaker::displayChart()
     cout << '\n';
     for (string line : UMLMaker::chart_data)
         cout << "  " << line << '\n';
-    // cout << '\n';
 }
 
 // ----------------------------------------------------------------------------
 
 void UMLMaker::chartToFile()
 {                     //"C:/Users/phill/Documents/"<~ Insert your output path!
-    string file_name = ("" + UMLMaker::class_name + "_UML_Diagram.txt");
+    string file_name = (""
+        + UMLMaker::class_name + "_UML_Diagram.txt");
 
     ofstream to_file(file_name);
     if (to_file.is_open())
@@ -219,7 +227,7 @@ void UMLMaker::chartToFile()
     else
     {
         cout << "\n"
-                "  Error: problem opening: "
+            "  Error: problem opening: "
              << file_name << '\n';
     }
 }
