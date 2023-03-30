@@ -5,7 +5,7 @@ Date:3/4/2023
 C/Cpp:11+ ANSI Standard
 Last Updated:3/19/2023
 
-IMPORTANT, see the chartToFile() definition!!
+IMPORTANT, see the diagramToFile() definition!!
 
 This class is used to produce Unified Modeling Language (UML) diagrams.
 
@@ -35,9 +35,9 @@ This class is used to produce Unified Modeling Language (UML) diagrams.
     |  +setClassMethod(class_method:string):void      |
     |  +setWidth():void                               |
     |  +makeEdgeSepLine():void                        |
-    |  +makeChart():void                              |
-    |  +displayChart():void                           |
-    |  +chartToFile():void                            |
+    |  +makeDiagram():void                            |
+    |  +displayDiagram():void                         |
+    |  +diagramToFile():void                          |
     +-------------------------------------------------+
 -------10--------20--------30--------40--------50--------60--------70--------80
 */
@@ -71,9 +71,9 @@ public:
     void setClassMethod(string class_method);
     void setWidth();
     void makeEdgeSepLine();
-    void makeChart();
-    void displayChart();
-    void chartToFile();
+    void makeDiagram();
+    void displayDiagram();
+    void diagramToFile();
 };
 
 // ----------------------------------------------------------------------------

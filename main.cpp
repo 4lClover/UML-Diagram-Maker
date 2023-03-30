@@ -3,18 +3,26 @@ Program:UML Diagram Maker
 Author:Phillip McCullough
 Date:2/28/2023
 C/Cpp:11+ ANSI Standard
-Last Updated:3/19/2023
+Last Updated:3/29/2023
 
 UML Diagram Maker produces UML diagrams.
 
-    +-----------------------+
-    |   UML Diagram Maker   |
-    +-----------------------+
-    |  +main():int          |
-    |  +greeting():void     |
-    |  +menu():static void  |
-    |  +classMaker():void   |
-    +-----------------------+
+    +---------------------------------------------------+
+    |                 UML Diagram Maker                 |
+    +---------------------------------------------------+
+    |  +greeting():void                                 |
+    |  +menu():void                                     |
+    |  +nameClass():string                              |
+    |  +makePrivateAttr(diagram:UMLMaker&):void         |
+    |  +makePublicAttr(diagram:UMLMaker&):void          |
+    |  +makePrivateConstructor(diagram:UMLMaker&):void  |
+    |  +makePublicConstructor(diagram:UMLMaker&):void   |
+    |  +makePrivateDestructor(diagram:UMLMaker&):void   |
+    |  +makePublicDestructor(diagram:UMLMaker&):void    |
+    |  +makePrivateMethod(diagram:UMLMaker&):void       |
+    |  +makePublicMethod(diagram:UMLMaker&):void        |
+    |  +diagramMaker():void                             |
+    +---------------------------------------------------+
 -------10--------20--------30--------40--------50--------60--------70--------80
 */
 #include "UMLMaker.h"
@@ -24,8 +32,17 @@ UML Diagram Maker produces UML diagrams.
 using namespace std;
 
 void greeting();
-static void menu();
-void classMaker();
+void menu();
+string nameClass();
+void makePrivateAttr(UMLMaker &diagram);
+void makePublicAttr(UMLMaker &diagram);
+void makePrivateConstructor(UMLMaker &diagram);
+void makePublicConstructor(UMLMaker &diagram);
+void makePrivateDestructor(UMLMaker &diagram);
+void makePublicDestructor(UMLMaker &diagram);
+void makePrivateMethod(UMLMaker &diagram);
+void makePublicMethod(UMLMaker &diagram);
+void diagramMaker();
 
 int main()
 {
@@ -41,156 +58,88 @@ int main()
 void greeting()
 {
     cout << "\n"
-        "      Welcome to UML Diagram Maker\n"
-        "  ------------------------------------\n"
-        "  You can create UML (Unified Modeling Language) diagrams\n"
-        "  by answering a series of yes or no questions. You will\n"
-        "  be prompted for specific information needed to generate\n"
-        "  a UML diagram with your specifications.\n";
+            "      Welcome to UML Diagram Maker\n"
+            "  ------------------------------------\n"
+            "  You can create UML (Unified Modeling Language) diagrams\n"
+            "  by answering a series of yes or no questions. You will\n"
+            "  be prompted for specific information needed to generate\n"
+            "  a UML diagram with your specifications.\n";
 }
 
 // ----------------------------------------------------------------------------
 
-static void menu()
+void menu()
 {
     string line;
     char option;
     do
     {
         cout << "\n"
-            "  Options:\n"
-            "  1)Make a UML Class Diagram.\n"
-            "  2)Exit\n"
-            "  Enter an option number: ";
+                "  Options:\n"
+                "  1)Make a UML Class Diagram.\n"
+                "  2)Exit\n"
+                "  Enter an option number: ";
         getline(cin, line);
         option = line[0];
 
         switch (option)
         {
         case '1':
-            classMaker();
+            diagramMaker();
             break;
         case '2':
             line = "exit";
             break;
         default:
             cout << "\n"
-                "  Sorry, I didn't get that. Choose a valid option.\n";
+                    "  Sorry, I didn't get that. Choose a valid option.\n";
         }
     } while (line != "exit");
 }
 
 // ----------------------------------------------------------------------------
 
-void classMaker()
+string nameClass()
 {
-    string yes_no, line, atribute, con_de_structor, method;
-
+    string yes_no, class_name;
     do
     {
         cout << "\n"
-            "  Enter the ClassName: ";
-        getline(cin, line);
+                "  Enter the ClassName: ";
+        getline(cin, class_name);
 
         cout << "\n"
-            "  You entered: "
-             << line << "\n"
-            "  Is this correct? [yes/no]: ";
+                "  You entered: "
+             << class_name << "\n"
+                              "  Is this correct? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
     } while (yes_no != "y");
 
-    // ----------------------------------------------------------------------------
+    return class_name;
+}
 
-    UMLMaker diagram = UMLMaker(line); // diagram == instance class UMLMaker.
+// ----------------------------------------------------------------------------
 
-    // Atributes, private then public.
+void makePrivateAttr(UMLMaker &diagram)
+{
+    string yes_no, line, atribute;
 
     do
-    {
-        cout << "\n"
-            "  Create private class atribute? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
-
-    } while (yes_no != "y" && yes_no != "n");
-
-    while (yes_no == "y")
     {
         atribute = "-"; // Atribute == Private
 
         do
         {
             cout << "\n"
-                "  Enter atribute name: ";
+                    "  Enter atribute name: ";
             getline(cin, line);
 
             cout << "\n"
-                "  You entered: "
+                    "  You entered: "
                  << line << "\n"
-                "  Is this correct? [yes/no]: ";
-            getline(cin, yes_no);
-            yes_no = tolower(yes_no[0]);
-
-        } while (yes_no != "y");
-
-        atribute += line; // Atribute has name.
-
-        do
-        {
-            cout << "\n"
-                "  Enter atribute type: ";
-            getline(cin, line);
-
-            cout << "\n"
-                "  You entered: "
-                 << line << "\n"
-                "  Is this correct? [yes/no]: ";
-            getline(cin, yes_no);
-            yes_no = tolower(yes_no[0]);
-
-        } while (yes_no != "y");
-
-        atribute += ":" + line; // Atribute has type.
-
-        diagram.setClassVar(atribute);
-
-        do
-        {
-            cout << "\n"
-                "  Create another private class artibute? [yes/no]: ";
-            getline(cin, yes_no);
-            yes_no = tolower(yes_no[0]);
-
-        } while (yes_no != "y" && yes_no != "n");
-    }
-
-    // ----------------------------------------------------------------------------
-
-    do
-    {
-        cout << "\n"
-            "  Create public class atribute? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
-
-    } while (yes_no != "y" && yes_no != "n");
-
-    while (yes_no == "y")
-    {
-        atribute = "+"; // Atribute == Public
-
-        do
-        {
-            cout << "\n"
-                "  Enter atribute name: ";
-            getline(cin, line);
-
-            cout << "\n"
-                "  You entered: "
-                 << line << "\n"
-                "  Is this correct? [yes/no]: ";
+                            "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -205,9 +154,9 @@ void classMaker()
             getline(cin, line);
 
             cout << "\n"
-                "  You entered: "
+                    "  You entered: "
                  << line << "\n"
-                "  Is this correct? [yes/no]: ";
+                            "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -220,27 +169,80 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Create another public class artibute? [yes/no]: ";
+                    "  Create another private class artibute? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y" && yes_no != "n");
-    }
 
-    // ----------------------------------------------------------------------------
+    } while (yes_no == "y");
+}
 
-    // Constructors, private then public.
+// ----------------------------------------------------------------------------
+
+void makePublicAttr(UMLMaker &diagram)
+{
+    string yes_no, line, atribute;
 
     do
     {
-        cout << "\n"
-            "  Create private constructor? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
+        atribute = "+"; // Atribute == Public
 
-    } while (yes_no != "y" && yes_no != "n");
+        do
+        {
+            cout << "\n"
+                    "  Enter atribute name: ";
+            getline(cin, line);
 
-    while (yes_no == "y")
+            cout << "\n"
+                    "  You entered: "
+                 << line << "\n"
+                            "  Is this correct? [yes/no]: ";
+            getline(cin, yes_no);
+            yes_no = tolower(yes_no[0]);
+
+        } while (yes_no != "y");
+
+        atribute += line; // Atribute has name.
+
+        do
+        {
+            cout << "\n"
+                    "  Enter atribute type: ";
+            getline(cin, line);
+
+            cout << "\n"
+                    "  You entered: "
+                 << line << "\n"
+                            "  Is this correct? [yes/no]: ";
+            getline(cin, yes_no);
+            yes_no = tolower(yes_no[0]);
+
+        } while (yes_no != "y");
+
+        atribute += ":" + line; // Atribute has type.
+
+        diagram.setClassVar(atribute);
+
+        do
+        {
+            cout << "\n"
+                    "  Create another public class artibute? [yes/no]: ";
+            getline(cin, yes_no);
+            yes_no = tolower(yes_no[0]);
+
+        } while (yes_no != "y" && yes_no != "n");
+
+    } while (yes_no == "y");
+}
+
+// ----------------------------------------------------------------------------
+
+void makePrivateConstructor(UMLMaker &diagram)
+{
+    string yes_no, line, con_de_structor;
+
+    do
     {
         con_de_structor = "-";                     // Constructor == Private
         con_de_structor += diagram.getClassName(); // Constructor has name.
@@ -249,7 +251,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Add parameter? [yes/no]: ";
+                    "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -260,13 +262,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter name: ";
+                        "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -277,13 +279,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter type: ";
+                        "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -294,7 +296,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Add another parameter? [yes/no]: ";
+                        "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -311,25 +313,22 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Create another private constructor? [yes/no]: ";
+                    "  Create another private constructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y" && yes_no != "n");
-    }
 
-    // ----------------------------------------------------------------------------
+    } while (yes_no == "y");
+}
+
+// ----------------------------------------------------------------------------
+
+void makePublicConstructor(UMLMaker &diagram)
+{
+    string yes_no, line, con_de_structor;
 
     do
-    {
-        cout << "\n"
-            "  Create public constructor? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
-
-    } while (yes_no != "y" && yes_no != "n");
-
-    while (yes_no == "y")
     {
         con_de_structor = "+";                     // Constructor == Public
         con_de_structor += diagram.getClassName(); // Constructor has name.
@@ -338,7 +337,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Add parameter? [yes/no]: ";
+                    "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -349,13 +348,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter name: ";
+                        "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -366,13 +365,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter type: ";
+                        "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -383,7 +382,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Add another parameter? [yes/no]: ";
+                        "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -400,27 +399,22 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Create another public constructor? [yes/no]: ";
+                    "  Create another public constructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y" && yes_no != "n");
-    }
 
-    // ----------------------------------------------------------------------------
+    } while (yes_no == "y");
+}
 
-    // Destructors, private then public.
+// ----------------------------------------------------------------------------
+
+void makePrivateDestructor(UMLMaker &diagram)
+{
+    string yes_no, line, con_de_structor;
 
     do
-    {
-        cout << "\n"
-            "  Create private destructor? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
-
-    } while (yes_no != "y" && yes_no != "n");
-
-    while (yes_no == "y")
     {
         con_de_structor = "-";                           // Destructor == Private
         con_de_structor += "~" + diagram.getClassName(); // Destructor has name.
@@ -429,7 +423,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Add parameter? [yes/no]: ";
+                    "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -440,13 +434,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter name: ";
+                        "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -457,13 +451,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter type: ";
+                        "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -474,7 +468,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Add another parameter? [yes/no]: ";
+                        "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -491,25 +485,22 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Create another private destructor? [yes/no]: ";
+                    "  Create another private destructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y" && yes_no != "n");
-    }
 
-    // ----------------------------------------------------------------------------
+    } while (yes_no == "y");
+}
+
+// ----------------------------------------------------------------------------
+
+void makePublicDestructor(UMLMaker &diagram)
+{
+    string yes_no, line, con_de_structor;
 
     do
-    {
-        cout << "\n"
-            "  Create public destructor? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
-
-    } while (yes_no != "y" && yes_no != "n");
-
-    while (yes_no == "y")
     {
         con_de_structor = "+";                           // Destructor == Public
         con_de_structor += "~" + diagram.getClassName(); // Destructor has name.
@@ -518,7 +509,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Add parameter? [yes/no]: ";
+                    "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -529,13 +520,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter name: ";
+                        "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -546,13 +537,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter type: ";
+                        "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -563,7 +554,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Add another parameter? [yes/no]: ";
+                        "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -580,40 +571,35 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Create another public destructor? [yes/no]: ";
+                    "  Create another public destructor? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y" && yes_no != "n");
-    }
 
-    // ----------------------------------------------------------------------------
+    } while (yes_no == "y");
+}
 
-    // Methods, private then public.
+// ----------------------------------------------------------------------------
+
+void makePrivateMethod(UMLMaker &diagram)
+{
+    string yes_no, line, method;
 
     do
-    {
-        cout << "\n"
-            "  Create private method? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
-
-    } while (yes_no != "y" && yes_no != "n");
-
-    while (yes_no == "y")
     {
         method = "-"; // Method == Private
 
         do
         {
             cout << "\n"
-                "  Enter method name: ";
+                    "  Enter method name: ";
             getline(cin, line);
 
             cout << "\n"
-                "  You entered: "
+                    "  You entered: "
                  << line << "\n"
-                "  Is this correct? [yes/no]: ";
+                            "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -625,7 +611,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Add parameter? [yes/no]: ";
+                    "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -636,13 +622,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter name: ";
+                        "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -653,13 +639,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter type: ";
+                        "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -670,7 +656,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Add another parameter? [yes/no]: ";
+                        "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -683,57 +669,54 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Enter method return type: ";
+                    "  Enter method return type: ";
             getline(cin, line);
 
             cout << "\n"
-                "  You entered: "
+                    "  You entered: "
                  << line << "\n"
-                "  Is this correct? [yes/no]: ";
+                            "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y");
 
-        method += "):" + line; // Method return type.
+        method += "):" + line; // Method has return type.
 
         diagram.setClassMethod(method);
 
         do
         {
             cout << "\n"
-                "  Create another private method? [yes/no]: ";
+                    "  Create another private method? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y" && yes_no != "n");
-    }
 
-    // ----------------------------------------------------------------------------
+    } while (yes_no == "y");
+}
+
+// ----------------------------------------------------------------------------
+
+void makePublicMethod(UMLMaker &diagram)
+{
+    string yes_no, line, method;
 
     do
-    {
-        cout << "\n"
-            "  Create public method? [yes/no]: ";
-        getline(cin, yes_no);
-        yes_no = tolower(yes_no[0]);
-
-    } while (yes_no != "y" && yes_no != "n");
-
-    while (yes_no == "y")
     {
         method = "+"; // Method == Public
 
         do
         {
             cout << "\n"
-                "  Enter method name: ";
+                    "  Enter method name: ";
             getline(cin, line);
 
             cout << "\n"
-                "  You entered: "
+                    "  You entered: "
                  << line << "\n"
-                "  Is this correct? [yes/no]: ";
+                            "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -745,7 +728,7 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Add parameter? [yes/no]: ";
+                    "  Add parameter? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
@@ -756,13 +739,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter name: ";
+                        "  Enter parameter name: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -773,13 +756,13 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Enter parameter type: ";
+                        "  Enter parameter type: ";
                 getline(cin, line);
 
                 cout << "\n"
-                    "  You entered: "
+                        "  You entered: "
                      << line << "\n"
-                    "  Is this correct? [yes/no]: ";
+                                "  Is this correct? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -790,7 +773,7 @@ void classMaker()
             do
             {
                 cout << "\n"
-                    "  Add another parameter? [yes/no]: ";
+                        "  Add another parameter? [yes/no]: ";
                 getline(cin, yes_no);
                 yes_no = tolower(yes_no[0]);
 
@@ -803,52 +786,176 @@ void classMaker()
         do
         {
             cout << "\n"
-                "  Enter method return type: ";
+                    "  Enter method return type: ";
             getline(cin, line);
 
             cout << "\n"
-                "  You entered: "
+                    "  You entered: "
                  << line << "\n"
-                "  Is this correct? [yes/no]: ";
+                            "  Is this correct? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
         } while (yes_no != "y");
 
-        method += "):" + line; // Method return type.
+        method += "):" + line; // Method has return type.
 
         diagram.setClassMethod(method);
 
         do
         {
             cout << "\n"
-                "  Create another public method? [yes/no]: ";
+                    "  Create another public method? [yes/no]: ";
             getline(cin, yes_no);
             yes_no = tolower(yes_no[0]);
 
         } while (yes_no != "y" && yes_no != "n");
-    }
+
+    } while (yes_no == "y");
+}
+
+// ----------------------------------------------------------------------------
+
+void diagramMaker()
+{
+
+    string yes_no, line;
+    UMLMaker diagram = UMLMaker(nameClass()); // Initialized class with name.
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create private class atribute? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePrivateAttr(diagram);
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create public class atribute? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePublicAttr(diagram);
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create private constructor? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePrivateConstructor(diagram);
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create public constructor? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePublicConstructor(diagram);
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create private destructor? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePrivateDestructor(diagram);
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create public destructor? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePublicDestructor(diagram);
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create private method? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePrivateMethod(diagram);
+
+    // ----------------------------------------------------------------------------
+
+    do
+    {
+        cout << "\n"
+                "  Create public method? [yes/no]: ";
+        getline(cin, yes_no);
+        yes_no = tolower(yes_no[0]);
+
+    } while (yes_no != "y" && yes_no != "n");
+
+    if (yes_no == "y")
+        makePublicMethod(diagram);
 
     // ----------------------------------------------------------------------------
 
     diagram.setWidth();
     diagram.makeEdgeSepLine();
-    diagram.makeChart();
-    diagram.displayChart();
+    diagram.makeDiagram();
+    diagram.displayDiagram();
+
+    // ----------------------------------------------------------------------------
 
     do
     {
         cout << "\n"
-            "  Write this diagram to file? [yes/no]: ";
+                "  Write this diagram to file? [yes/no]: ";
         getline(cin, yes_no);
         yes_no = tolower(yes_no[0]);
 
         if (yes_no == "y")
-            diagram.chartToFile();
+            diagram.diagramToFile();
 
     } while (yes_no != "y" && yes_no != "n");
 
     cout << "\n"
-        "  Create another UML Diagram.";
+            "  Create another UML Diagram.";
 }
 
 // ----------------------------------------------------------------------------

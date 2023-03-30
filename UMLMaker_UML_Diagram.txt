@@ -24,7 +24,7 @@
 |  +setClassMethod(class_method:string):void      |
 |  +setWidth():void                               |
 |  +makeEdgeSepLine():void                        |
-|  +makeChart():void                              |
-|  +displayChart():void                           |
-|  +chartToFile():void                            |
+|  +makeDiagram():void                            |
+|  +displayDiagram():void                         |
+|  +diagramToFile():void                          |
 +-------------------------------------------------+

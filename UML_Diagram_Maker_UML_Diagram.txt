@@ -1,0 +1,16 @@
++---------------------------------------------------+
+|                 UML Diagram Maker                 |
++---------------------------------------------------+
+|  +greeting():void                                 |
+|  +menu():void                                     |
+|  +nameClass():string                              |
+|  +makePrivateAttr(diagram:UMLMaker&):void         |
+|  +makePublicAttr(diagram:UMLMaker&):void          |
+|  +makePrivateConstructor(diagram:UMLMaker&):void  |
+|  +makePublicConstructor(diagram:UMLMaker&):void   |
+|  +makePrivateDestructor(diagram:UMLMaker&):void   |
+|  +makePublicDestructor(diagram:UMLMaker&):void    |
+|  +makePrivateMethod(diagram:UMLMaker&):void       |
+|  +makePublicMethod(diagram:UMLMaker&):void        |
+|  +diagramMaker():void                             |
++---------------------------------------------------+

@@ -5,7 +5,7 @@ Date:3/4/2023
 C/Cpp:11+ ANSI Standard
 Last Updated:3/19/2023
 
-IMPORTANT, see the chartToFile() definition!!
+IMPORTANT, see the diagramToFile() definition!!
 
 This class is used to produce UML (Unified Modeling Language) diagrams.
 UMLMaker.cpp holds UMLMaker class method definitions.
@@ -117,7 +117,7 @@ void UMLMaker::makeEdgeSepLine()
 
 // ----------------------------------------------------------------------------
 
-void UMLMaker::makeChart()
+void UMLMaker::makeDiagram()
 {
     string line;
 
@@ -141,7 +141,7 @@ void UMLMaker::makeChart()
     else
     {
         cout << "\n"
-            "  A class name is required, try again.\n";
+                "  A class name is required, try again.\n";
     }
 
     if (!UMLMaker::class_variables.empty())
@@ -203,7 +203,7 @@ void UMLMaker::makeChart()
 
 // ----------------------------------------------------------------------------
 
-void UMLMaker::displayChart()
+void UMLMaker::displayDiagram()
 {
     cout << '\n';
     for (string line : UMLMaker::chart_data)
@@ -212,10 +212,10 @@ void UMLMaker::displayChart()
 
 // ----------------------------------------------------------------------------
 
-void UMLMaker::chartToFile()
+void UMLMaker::diagramToFile()
 {                     //"C:/Users/phill/Documents/"<~ Insert your output path!
     string file_name = (""
-        + UMLMaker::class_name + "_UML_Diagram.txt");
+                        + UMLMaker::class_name + "_UML_Diagram.txt");
 
     ofstream to_file(file_name);
     if (to_file.is_open())
@@ -227,7 +227,7 @@ void UMLMaker::chartToFile()
     else
     {
         cout << "\n"
-            "  Error: problem opening: "
+                "  Error: problem opening: "
              << file_name << '\n';
     }
 }
