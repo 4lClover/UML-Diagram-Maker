@@ -98,6 +98,9 @@ void menu()
 }
 
 // ----------------------------------------------------------------------------
+/*
+Creates a title for UML diagram generation. 
+*/ 
 
 string nameClass()
 {
@@ -121,6 +124,9 @@ string nameClass()
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create private attribute fields.
+*/
 
 void makePrivateAttr(UMLMaker &diagram)
 {
@@ -179,6 +185,9 @@ void makePrivateAttr(UMLMaker &diagram)
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create public attribute fields.
+*/
 
 void makePublicAttr(UMLMaker &diagram)
 {
@@ -237,6 +246,9 @@ void makePublicAttr(UMLMaker &diagram)
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create private constructors.
+*/
 
 void makePrivateConstructor(UMLMaker &diagram)
 {
@@ -323,6 +335,9 @@ void makePrivateConstructor(UMLMaker &diagram)
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create public constructors.
+*/
 
 void makePublicConstructor(UMLMaker &diagram)
 {
@@ -409,6 +424,9 @@ void makePublicConstructor(UMLMaker &diagram)
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create private destructors.
+*/
 
 void makePrivateDestructor(UMLMaker &diagram)
 {
@@ -495,6 +513,9 @@ void makePrivateDestructor(UMLMaker &diagram)
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create public destructors.
+*/
 
 void makePublicDestructor(UMLMaker &diagram)
 {
@@ -581,6 +602,9 @@ void makePublicDestructor(UMLMaker &diagram)
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create private methods.
+*/
 
 void makePrivateMethod(UMLMaker &diagram)
 {
@@ -698,6 +722,9 @@ void makePrivateMethod(UMLMaker &diagram)
 }
 
 // ----------------------------------------------------------------------------
+/*
+Gathers information needed to create public methods.
+*/
 
 void makePublicMethod(UMLMaker &diagram)
 {
@@ -817,11 +844,18 @@ void makePublicMethod(UMLMaker &diagram)
 
 void diagramMaker()
 {
-
+/*
+diagramMaker prompts the user for items to be included in the creation of
+a UML diagram. Items to be included are passed to methods that create the
+desired items. diagramMaker also handles the additional tasks required for
+the generation of a UML diagram. diagramMaker lastly presents the user with
+a UML diagram that can be copied from the terminal or written to a
+UML_Diagram.txt file.
+*/
     string yes_no, line;
     UMLMaker diagram = UMLMaker(nameClass()); // Initialized class with name.
 
-    // ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
     do
     {
@@ -954,8 +988,8 @@ void diagramMaker()
 
     } while (yes_no != "y" && yes_no != "n");
 
-    cout << "\n"
-            "  Create another UML Diagram.";
+    cout << "\n" // Statement for UI as control is passed back to the menu.
+            "  Would you like to create another UML diagram?";
 }
 
 // ----------------------------------------------------------------------------
