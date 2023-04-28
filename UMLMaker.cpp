@@ -15,6 +15,7 @@ UMLMaker.cpp holds UMLMaker class method definitions.
 #include "UMLMaker.h"
 
 // ----------------------------------------------------------------------------
+
 UMLMaker::UMLMaker()
 {
     UMLMaker::class_name = "";
