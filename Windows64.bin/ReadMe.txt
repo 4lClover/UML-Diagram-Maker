@@ -1,0 +1,1 @@
+To run this exe you have Visual C++ installed on your version of windows.
