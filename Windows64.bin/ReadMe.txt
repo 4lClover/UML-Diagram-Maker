@@ -1,1 +1,1 @@
-To run this exe you have Visual C++ installed on your version of windows.
+To run this exe you must have Visual C++ installed on your version of windows.
