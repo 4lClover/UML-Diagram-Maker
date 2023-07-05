@@ -1,0 +1,1 @@
+This exec is compiled for intel64 architecture.
